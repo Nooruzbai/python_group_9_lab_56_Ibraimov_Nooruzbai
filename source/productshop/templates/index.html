@@ -8,22 +8,22 @@
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">id</th>
+{#      <th scope="col">id</th>#}
       <th scope="col">Name</th>
-      <th scope="col">Description</th>
+      <th scope="col">Category</th>
       <th scope="col">Price</th>
     </tr>
   </thead>
   <tbody>
   {% for product in products %}
     <tr>
-        <th scope="row">{{ product.pk }}</th>
+{#        <th scope="row">{{ product.pk }}</th>#}
         <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
+        <td>{{ product.get_category_display }}</td>
         <td>{{ product.price }}</td>
-    <td> <a class="btn btn-primary btn-sm" href="{% url "detailed_view" product.pk %}">Details</a></td>
-    <td> <a class="btn btn-primary btn-sm" href="{% url "delete_view" product.pk %}">Delete</a></td>
-    <td> <a class="btn btn-primary btn-sm" href="{% url "edit_view" product.pk %}">Edit</a></td>
+    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "detailed_view" product.pk %}"><i class="fas fa-info"></i></a></td>
+    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "delete_view" product.pk %}"><i class="fas fa-trash-alt"></i></a></td>
+    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "edit_view" product.pk %}"><i class="far fa-edit"></i></a></td>
     </tr>
     {% endfor %}
   </table>

@@ -8,7 +8,7 @@ from productshop.forms import ProductForm
 # Create your views here.
 
 def index_view(request):
-    products = Product.objects.all()
+    products = Product.objects.filter(remainder__gte=1).order_by('category', 'name')
     return render(request, 'index.html', {"products": products})
 
 
