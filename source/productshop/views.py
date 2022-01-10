@@ -41,4 +41,27 @@ def create_view(request):
         return render(request, 'create_product.html', {'form': form})
 
 
+def edit_view(request, pk):
+    products = get_object_or_404(Product, pk=pk)
+    if request.method == 'GET':
+        form = ProductForm(initial={
+            'name': products.name,
+            'description': products.description,
+            'category': products.category,
+            'remainder': products.remainder,
+            "price": products.price
+        })
+        return render(request, 'edit_view.html', {'products': products, 'form': form, 'choices': CHOICES})
+    else:
+        form = ProductForm(data=request.POST)
+        if form.is_valid():
+            products.name = form.cleaned_data.get('name')
+            products.description = form.cleaned_data.get('description')
+            products.category = form.cleaned_data.get('category')
+            products.remainder = form.cleaned_data.get('remainder')
+            products.price = form.cleaned_data.get('price')
+            products.save()
+            return redirect('index')
+        return render(request, 'edit_view.html', {'products': products, 'form': form, 'choices': CHOICES})
+
 

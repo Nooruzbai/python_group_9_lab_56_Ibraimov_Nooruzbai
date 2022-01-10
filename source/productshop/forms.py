@@ -9,7 +9,7 @@ class ProductForm(forms.ModelForm):
         fields = "__all__"
         error_messages={
             "name": {
-                "required": "Поле обязательно для заполнения"
+                "required": "The field is required to be filled"
             }
         }
 
