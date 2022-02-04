@@ -5,12 +5,12 @@
 
 <div class="container">
 
-    <form action="/create/" method="POST">
+    <form action="{% url 'product_create_view' %}" method="POST">
         {% include "partial/form.html" with button_text="Submit" %}
     </form>
 
     <div class="pt-1">
-        <a class="btn btn-primary btn-sm" href="{% url "index" %}">Back to main</a>
+        <a class="btn btn-primary btn-sm" href="{% url "products_list_view" %}">Back to main</a>
     </div>
 
 </div>
