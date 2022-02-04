@@ -2,19 +2,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseNotFound
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, DeleteView, CreateView, UpdateView
-
-from productshop.models import CHOICES
 from productshop.models import Product
 from productshop.forms import ProductForm
+from productshop.views.base import SearchView
 
 
-class ProductsListView(ListView):
+class ProductsListView(SearchView):
     model = Product
     context_object_name = 'products'
     template_name = 'products/products_list.html'
-    paginate_by = 5
+    paginate_by = 10
     paginate_orphans = 0
     ordering = ['name']
+    search_fields = ['name']
+
 
 
 class ProductDetailedView(DetailView):
@@ -47,7 +48,7 @@ class ProductUpdateView(UpdateView):
     model = Product
 
     def get_success_url(self):
-        return reverse('products_list_view')
+        return reverse('product_detailed_view', kwargs={'pk': self.object.pk})
 
 
 # def edit_view(request, pk):

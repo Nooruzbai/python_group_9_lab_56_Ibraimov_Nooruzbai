@@ -5,6 +5,10 @@
     <a class="btn btn-primary btn-lg" href="{% url "product_create_view" %}">Create new</a>
 </div>
 
+<div class="search">
+    {% include 'partial/search_form.html' %}
+</div>
+
 <table class="table">
   <thead>
     <tr>
@@ -28,4 +32,21 @@
     {% endfor %}
   </table>
 
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1{% if search %}&search={{ search }}{% endif %}">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}{% if query %}&{{ search }}{% endif %}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search }}{% endif %}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 {% endblock %}
