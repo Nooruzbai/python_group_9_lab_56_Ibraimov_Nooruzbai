@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="p-3">
-    <a class="btn btn-primary btn-lg" href="{% url "create_view" %}">Create new</a>
-</div>
+{#<div class="p-3">#}
+{#    <a class="btn btn-primary btn-lg" href="{% url "create_view" %}">Create new</a>#}
+{#</div>#}
 
 <table class="table">
   <thead>
@@ -22,8 +22,8 @@
         <td>{{ product.get_category_display }}</td>
         <td>{{ product.price }}</td>
     <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "detailed_view" product.pk %}"><i class="fas fa-info"></i></a></td>
-    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "delete_view" product.pk %}"><i class="fas fa-trash-alt"></i></a></td>
-    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "edit_view" product.pk %}"><i class="far fa-edit"></i></a></td>
+{#    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "delete_view" product.pk %}"><i class="fas fa-trash-alt"></i></a></td>#}
+{#    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "edit_view" product.pk %}"><i class="far fa-edit"></i></a></td>#}
     </tr>
     {% endfor %}
   </table>
