@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, DeleteView
 
@@ -14,12 +15,8 @@ class BagListView(ListView):
 class BagAddView(View):
 
     def post(self, request, *args, **kwargs):
-        print(self.kwargs.get('pk'))
-        # product_pk = request.POST.get('pk')
         product = get_object_or_404(Product, pk=kwargs['pk'])
-        print(product)
         product_in_bag = ProductInBag.objects.filter(product_id=product.pk)
-        print(product_in_bag)
         if product_in_bag:
             product_in_bag[0].amount += 1
             product_in_bag[0].save()
@@ -28,19 +25,11 @@ class BagAddView(View):
         return redirect('products_list_view')
 
 
-        # print(bag)
-        # return redirect('products_list_view')
+class BagDeleteView(DeleteView):
+    model = ProductInBag
+    success_url = reverse_lazy('products_in_bag')
+    context_object_name = 'product'
 
-    # def get_context_data(self, **kwargs):
-    #
-#
-    #     def get_context_data(self, **kwargs):
-    #         context = super().get_context_data(**kwargs)
-    #         context['form'] = SearchForm()
-    #         if self.search_value:
-    #             context['form'] = SearchForm(initial={"search": self.search_value})
-    #             context['search'] = self.search_value
-    #         return context
 
-#
-# class BagDeleteView(DeleteView):
+
+

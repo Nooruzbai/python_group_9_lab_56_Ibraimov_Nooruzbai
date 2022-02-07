@@ -28,14 +28,10 @@
         <td>{{ product.amount }}</td>
         <td>{{ product.get_total_for_product}}</td>
 
-
-{#    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "product_detailed_view" product.pk %}"><i class="fas fa-info"></i></a></td>#}
-{#    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "product_delete_view" product.pk %}"><i class="fas fa-trash-alt"></i></a></td>#}
-{#    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "product_edit_view" product.pk %}"><i class="far fa-edit"></i></a></td>#}
-{#<form action="{% url 'bag_add_view' product.pk %}" method="POST">#}
-{#{% csrf_token %}#}
-{#    <td><button type="submit">Add</button></td>#}
-{#</form>#}
+<form action="{% url "product_in_bag_delete_view" product.pk %}" method="POST">
+    {% csrf_token %}
+    <td><button type="submit">Delete</button></td>
+</form>
     </tr>
     {% endfor %}
   </table>
