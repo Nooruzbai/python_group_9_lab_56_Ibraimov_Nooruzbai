@@ -19,15 +19,22 @@ class Product(models.Model):
         verbose_name = "Product"
         verbose_name_plural = "Products"
 
-# class ProductInBag(models.Model):
-#     amount = models.PositiveIntegerField(null=False, blank=False,  verbose_name='Amount')
-#     product = models.ForeignKey('productshop.Product',
-#                                 on_delete=models.CASCADE,
-#                                 related_name="products_in_bag",
-#                                 verbose_name="Product in Bag",)
-#
-#     class Meta:
-#         db_table = 'product_in_bag'
-#         verbose_name = 'Product in Bag'
-#         verbose_name_plural = 'Products in Bag'
+
+class ProductInBag(models.Model):
+    amount = models.PositiveIntegerField(null=False, blank=False,  verbose_name='Amount')
+    product = models.ForeignKey('productshop.Product',
+                                on_delete=models.CASCADE,
+                                related_name="products_in_bag",
+                                verbose_name="Product in Bag",)
+
+    class Meta:
+        db_table = 'product_in_bag'
+        verbose_name = 'Product in Bag'
+        verbose_name_plural = 'Products in Bag'
+
+    @property
+    def get_total_for_product(self):
+        total = self.amount * self.product.price
+        return total
+
 

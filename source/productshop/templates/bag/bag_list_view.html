@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="p-3">
+    <a class="btn btn-primary btn-lg" href="{% url "product_create_view" %}">Create new</a>
+</div>
+
+{#<div class="search">#}
+{#    {% include 'partial/search_form.html' %}#}
+{#</div>#}
+
+<table class="table">
+  <thead>
+    <tr>
+{#      <th scope="col">id</th>#}
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for product in products_in_bag %}
+    <tr>
+{#        <th scope="row">{{ product.pk }}</th>#}
+        <td>{{ product.product.name }}</td>
+        <td>{{ product.product.price }}</td>
+        <td>{{ product.amount }}</td>
+        <td>{{ product.get_total_for_product}}</td>
+
+
+{#    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "product_detailed_view" product.pk %}"><i class="fas fa-info"></i></a></td>#}
+{#    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "product_delete_view" product.pk %}"><i class="fas fa-trash-alt"></i></a></td>#}
+{#    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "product_edit_view" product.pk %}"><i class="far fa-edit"></i></a></td>#}
+{#<form action="{% url 'bag_add_view' product.pk %}" method="POST">#}
+{#{% csrf_token %}#}
+{#    <td><button type="submit">Add</button></td>#}
+{#</form>#}
+    </tr>
+    {% endfor %}
+  </table>
+
+{#<div class="pagination">#}
+{#    <span class="step-links">#}
+{#        {% if page_obj.has_previous %}#}
+{#            <a href="?page=1{% if search %}&search={{ search }}{% endif %}">&laquo; first</a>#}
+{#            <a href="?page={{ page_obj.previous_page_number }}{% if query %}&{{ search }}{% endif %}">previous</a>#}
+{#        {% endif %}#}
+{##}
+{#        <span class="current">#}
+{#            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.#}
+{#        </span>#}
+{##}
+{#        {% if page_obj.has_next %}#}
+{#            <a href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}">next</a>#}
+{#            <a href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search }}{% endif %}">last &raquo;</a>#}
+{#        {% endif %}#}
+{#    </span>#}
+{#</div>#}
+{% endblock %}

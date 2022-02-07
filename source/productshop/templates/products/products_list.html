@@ -4,6 +4,10 @@
 <div class="p-3">
     <a class="btn btn-primary btn-lg" href="{% url "product_create_view" %}">Create new</a>
 </div>
+<div class="p-3">
+    <a class="btn btn-primary btn-lg" href="{% url "products_in_bag" %}">Cart</a>
+</div>
+
 
 <div class="search">
     {% include 'partial/search_form.html' %}
@@ -12,7 +16,7 @@
 <table class="table">
   <thead>
     <tr>
-{#      <th scope="col">id</th>#}
+      <th scope="col">id</th>
       <th scope="col">Name</th>
       <th scope="col">Category</th>
       <th scope="col">Price</th>
@@ -21,13 +25,22 @@
   <tbody>
   {% for product in products %}
     <tr>
-{#        <th scope="row">{{ product.pk }}</th>#}
+        <th scope="row">{{ product.pk }}</th>
         <td>{{ product.name }}</td>
         <td>{{ product.get_category_display }}</td>
         <td>{{ product.price }}</td>
     <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "product_detailed_view" product.pk %}"><i class="fas fa-info"></i></a></td>
     <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "product_delete_view" product.pk %}"><i class="fas fa-trash-alt"></i></a></td>
     <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "product_edit_view" product.pk %}"><i class="far fa-edit"></i></a></td>
+{#    <td> <a class="btn btn-primary btn-sm ps-3 pe-3" href="{% url "bag_add_view" product.pk %}"><i class="fas fa-shopping-cart"></i></a></td>#}
+    <form action="{% url 'bag_add_view' product.pk %}" method="POST">
+                        {% csrf_token %}
+    <td><button type="submit">Add</button></td>
+    </form>
+
+
+
+
     </tr>
     {% endfor %}
   </table>

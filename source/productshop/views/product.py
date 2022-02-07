@@ -15,9 +15,6 @@ class ProductsListView(SearchView):
     paginate_orphans = 0
     ordering = ['category', 'name']
     search_fields = ['name']
-    #
-    # products = Product.objects.filter(remainder__gte=1).order_by('category', 'name')
-    # return render(request, 'products/products_list.html', {"products": products})
 
 
 class ProductDetailedView(DetailView):
