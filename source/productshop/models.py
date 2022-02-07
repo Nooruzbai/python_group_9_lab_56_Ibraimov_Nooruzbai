@@ -38,3 +38,31 @@ class ProductInBag(models.Model):
         return total
 
 
+class Order(models.Model):
+    username = models.CharField(max_length=200, null=False, blank=False, verbose_name='Username'),
+    phone_number = models.CharField(max_length=200, null=False, blank=False, verbose_name='Phone number')
+    address = models.CharField(max_length=200, null=False, blank=False, verbose_name='Address'),
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name="Date Created"),
+
+    def __str__(self):
+        return f"{self.pk}. {self.username} {self.phone_number}  {self.date_created}"
+
+    class Meta:
+        db_table = "order"
+        verbose_name = "Order"
+        verbose_name_plural = "Orders"
+
+
+class ProductOrder(models.Model):
+    product=models.ForeignKey('productshop.Product', on_delete=models.CASCADE, related_name='product_orders', verbose_name='Product')
+    order=models.ForeignKey('productshop.Order', on_delete=models.CASCADE, related_name='product_orders', verbose_name='Orders')
+    amount=models.PositiveIntegerField(verbose_name="Amount")
+
+    def __str__(self):
+        return f"{self.pk}. {self.product} {self.order}  {self.amount}"
+
+    class Meta:
+        db_table = "product_order"
+        verbose_name = "Product Order"
+        verbose_name_plural = "Product Orders"
+
