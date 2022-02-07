@@ -36,21 +36,19 @@
     {% endfor %}
   </table>
 
-{#<div class="pagination">#}
-{#    <span class="step-links">#}
-{#        {% if page_obj.has_previous %}#}
-{#            <a href="?page=1{% if search %}&search={{ search }}{% endif %}">&laquo; first</a>#}
-{#            <a href="?page={{ page_obj.previous_page_number }}{% if query %}&{{ search }}{% endif %}">previous</a>#}
-{#        {% endif %}#}
-{##}
-{#        <span class="current">#}
-{#            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.#}
-{#        </span>#}
-{##}
-{#        {% if page_obj.has_next %}#}
-{#            <a href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}">next</a>#}
-{#            <a href="?page={{ page_obj.paginator.num_pages }}{% if search %}&search={{ search }}{% endif %}">last &raquo;</a>#}
-{#        {% endif %}#}
-{#    </span>#}
-{#</div>#}
+
+
+
+<div class="container">
+
+    <form action="{% url 'makeorder' %}" method="POST">
+        {% include "partial/form.html" with button_text="Submit" %}
+    </form>
+
+    <div class="pt-1">
+        <a class="btn btn-primary btn-sm" href="{% url "products_list_view" %}">Back to main</a>
+    </div>
+
+</div>
+
 {% endblock %}

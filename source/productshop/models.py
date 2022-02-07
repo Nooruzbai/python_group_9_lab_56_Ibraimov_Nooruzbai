@@ -39,10 +39,10 @@ class ProductInBag(models.Model):
 
 
 class Order(models.Model):
-    username = models.CharField(max_length=200, null=False, blank=False, verbose_name='Username'),
+    username = models.CharField(max_length=200, null=False, blank=False, verbose_name='Username')
     phone_number = models.CharField(max_length=200, null=False, blank=False, verbose_name='Phone number')
-    address = models.CharField(max_length=200, null=False, blank=False, verbose_name='Address'),
-    date_created = models.DateTimeField(auto_now_add=True, verbose_name="Date Created"),
+    address = models.CharField(max_length=200, null=False, blank=False, verbose_name='Address')
+    date_created = models.DateTimeField(auto_now_add=True, verbose_name="Date Created")
 
     def __str__(self):
         return f"{self.pk}. {self.username} {self.phone_number}  {self.date_created}"

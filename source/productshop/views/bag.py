@@ -3,6 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.views import View
 from django.views.generic import ListView, CreateView, DeleteView
 
+from productshop.forms import OrderForm
 from productshop.models import ProductInBag, Product
 
 
@@ -10,6 +11,12 @@ class BagListView(ListView):
     template_name = 'bag/bag_list_view.html'
     model = ProductInBag
     context_object_name = 'products_in_bag'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(BagListView, self).get_context_data()
+        context['form'] = OrderForm
+        print(OrderForm().fields)
+        return context
 
 
 class BagAddView(View):
